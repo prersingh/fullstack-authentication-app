@@ -51,10 +51,10 @@ const Signup = () => {
           </form>
         </div>
         <div className="login-info">
-          <h4>Have an account ? <Link to="/login">Login</Link></h4>
+          <h4>Have an account ? <Link to="/login">Sign in</Link></h4>
           <div className='logoin'>
-          <h2>Login</h2>
-          <p>Sign Up is a registration process that allows users to create a new account on a website or application. By providing their name, email, and password, users can create a personalized account and access various features and services.</p>
+          <h2>Create an account</h2>
+          <p>Sign Up is a registration process that allows users to create a new account on a website or application. By providing their email, users can create a personalized account and access various features and services.</p>
           </div>
                   </div>
       </div>
