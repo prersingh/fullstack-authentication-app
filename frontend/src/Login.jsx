@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import validation from './LoginValidation';
-import axios from 'axios';
+import validation from './components/LoginValidation';
+
 
 const Login = () => {
   const navigate = useNavigate();
