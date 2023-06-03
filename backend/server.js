@@ -21,6 +21,31 @@ db.connect((err) => {
   console.log('Connected to the database');
 });
 
+
+app.get('/user/:email', (req, res) => {
+    const userEmail = req.params.email;
+    const sql = 'SELECT name, email FROM login WHERE email = ?';
+  
+    db.query(sql, [userEmail], (err, result) => {
+      if (err) {
+        console.error('Error querying the database:', err);
+        return res.status(500).json('Error querying the database');
+      }
+  
+      if (result.length > 0) {
+        const userData = {
+          name: result[0].name,
+          email: result[0].email,
+        };
+        return res.json(userData);
+      } else {
+        return res.status(404).json('User not found');
+      }
+    });
+  });
+  
+  
+
 app.post('/signup', (req, res) => {
     const { name, email } = req.body;
     const sql = 'INSERT INTO login (name, email) VALUES (?, ?)';
