@@ -89,7 +89,7 @@ const Signup = () => {
 
       <div className="login-container">
         <div className="login-form">
-          <h2>Sign Up</h2>
+          <h2></h2>
           <div className="step-completion">
             <div className={`step-dot ${step >= 1 ? 'completed' : ''}`} />
             <div className={`step-line ${step >= 2 ? 'completed' : ''}`} />
@@ -130,6 +130,20 @@ const Signup = () => {
               <button type="submit">Validate</button>
             </form>
           )}
+
+          {step === 3 && (
+            <form>
+              <div className="form-group">
+                <h2>Validate OTP</h2>
+                <p>Enter the OTP sent to your email address to validate your account.</p>
+                <div className="form-group">
+                  <label htmlFor="otp">Enter OTP</label>
+                  <input type="text" placeholder="Enter OTP" name="otp" onChange={(e) => setUserOTP(e.target.value)} />
+                </div>
+                <button type="submit">Validate</button>
+              </div>
+            </form>
+          )}
         </div>
 
         <div className="login-info">
@@ -137,12 +151,32 @@ const Signup = () => {
             Have an account? <Link to="/login">Login</Link>
           </h4>
           <div className="logoin">
-            <h2>Sign Up</h2>
-            <p>
-              Sign Up is a registration process that allows users to create a new account on a website or application. By
-              providing their name, email, and password, users can create a personalized account and access various features
-              and services.
-            </p>
+            {step === 1 && (
+              <>
+                <h2>Create Account</h2>
+                <p>
+                Signup to create your account. Enter your email and password to get started. By signing up, you can access personalized features and services tailored to your needs.
+                </p>
+              </>
+            )}
+            {step === 2 && (
+              <>
+                <h2>Validate OTP</h2>
+                <p>
+                  Enter the OTP sent to your email address to validate your account. Make sure to check your spam folder if you
+                  don't see the email in your inbox.
+                </p>
+              </>
+            )}
+            {step === 3 && (
+              <>
+                <h2>Sign Up</h2>
+                <p>
+                  Congratulations! Your account has been successfully validated. Click the "Sign Up" button to complete the
+                  registration process.
+                </p>
+              </>
+            )}
           </div>
         </div>
       </div>

@@ -117,11 +117,20 @@ const Login = () => {
             Don't have an account? <Link to="/">Sign Up</Link>
           </h4>
           <div className="logoin">
-            <h2>Login</h2>
-            <p>
-              Login is a secure authentication process that allows users to access their personal accounts on a website or
-              application.
-            </p>
+            {step === 1 && (
+              <div>
+                <h2>Login</h2>
+                Login to your account and unlock a world of possibilities. Simply enter your email to securely access your
+                account.
+              </div>
+            )}
+            {step === 2 && (
+              <div>
+                <h2>Validate OTP</h2>
+                Validate the OTP sent to your email to proceed with login. Enter the OTP received in the field above and
+                click "Log In" to access your account.
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -130,4 +139,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default Login
