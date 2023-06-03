@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import validation from './components/LoginValidation';
+import validation from './components/SignupValidation';
 import axios from 'axios';
 import emailjs from 'emailjs-com';
 
@@ -31,8 +31,8 @@ const Signup = () => {
 
     const templateParams = {
       to_email: values.email,
-      from_name: 'Max Techies',
-      from_email: 'info@maxtechies.com',
+      from_name: 'Disney',
+      from_email: 'disney@gmail.com',
       otp: generatedOTP,
     };
 

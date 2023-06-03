@@ -36,6 +36,23 @@ app.post('/signup', (req, res) => {
     });
 });
 
+app.post('/login', (req, res) => {
+    const { email } = req.body;
+    const sql = 'SELECT * FROM login WHERE email = ?';
+  
+    db.query(sql, [email], (err, result) => {
+      if (err) {
+        console.error('Error querying the database:', err);
+        return res.status(500).json('Error querying the database');
+      }
+  
+      if (result.length > 0) {
+        return res.json('Success');
+      } else {
+        return res.json('Failed');
+      }
+    });
+  });
 
 const port = 8081;
 app.listen(port, () => {
