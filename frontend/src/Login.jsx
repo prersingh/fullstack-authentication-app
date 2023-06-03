@@ -30,16 +30,17 @@ const Login = () => {
   };
 
   return (
+    
     <div className="login-page">
       <div className="top-circle"></div>
       <div className="login-container">
         <div className="login-form">
-          <h2>Login</h2>
+          <h2></h2>
           {step === 1 && (
             <form action="#">
               <div className="form-group">
-                <label htmlFor="email">Email</label>
-                <input type="email" placeholder="Enter Email" name="email" onChange={handleInput} />
+                <label htmlFor="email"></label>
+                <input type="email" placeholder="Email" name="email" onChange={handleInput} />
                 {errors.email && <span>{errors.email}</span>}
               </div>
               <button type="button" onClick={handleNext}>
@@ -51,7 +52,7 @@ const Login = () => {
           {step === 2 && (
             <form action="#" onSubmit={handleLogin}>
               <div className="form-group">
-                <label htmlFor="otp">Enter OTP</label>
+                <label htmlFor="otp"></label>
                 <input type="text" placeholder="Enter OTP" name="otp" onChange={(e) => setUserOTP(e.target.value)} />
               </div>
               <button type="submit">Validate</button>
@@ -73,6 +74,7 @@ const Login = () => {
       </div>
       <div className="bottom-circle"></div>
     </div>
+    
   );
 };
 

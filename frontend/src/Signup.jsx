@@ -36,8 +36,11 @@ const Signup = () => {
       <div className="topp-circle"></div>
 
       <div className="login-container">
+
         <div className="login-form">
-          <h2>Sign Up</h2>
+        <div className="topps-circle"></div>
+
+          <h2></h2>
           <div className="step-completion">
   <div className={`step-dot ${step >= 1 ? 'completed' : ''}`} />
   <div className={`step-line ${step >= 2 ? 'completed' : ''}`} />
@@ -53,7 +56,7 @@ const Signup = () => {
     Validate OTP
   </span>
   <span className={`${step >= 3 ? 'completed' : ''}`}>
-    Sign Up
+    Sign in
   </span>
 </div>
 
@@ -61,13 +64,13 @@ const Signup = () => {
           {step === 1 && (
             <form action="#">
               <div className="form-group">
-                <label htmlFor="Name">Name</label>
-                <input type="name" placeholder="Enter Name" name="name" onChange={handleInput} />
+                <label htmlFor="Name"></label>
+                <input type="name" placeholder="Name" name="name" onChange={handleInput} />
                 {errors.name && <span>{errors.name}</span>}
               </div>
               <div className="form-group">
-                <label htmlFor="email">Email</label>
-                <input type="email" placeholder="Enter Email" name="email" onChange={handleInput} />
+                <label htmlFor="email"></label>
+                <input type="email" placeholder="Email" name="email" onChange={handleInput} />
                 {errors.email && <span>{errors.email}</span>}
               </div>
               <button type="button" onClick={handleNext}>
@@ -79,7 +82,7 @@ const Signup = () => {
           {step === 2 && (
             <form action="#" onSubmit={handleSignup}>
               <div className="form-group">
-                <label htmlFor="otp">Enter OTP</label>
+                <label htmlFor="otp">Validate</label>
                 <input type="text" placeholder="Enter OTP" name="otp" onChange={(e) => setUserOTP(e.target.value)} />
               </div>
               <button type="submit">Validate</button>
@@ -88,14 +91,16 @@ const Signup = () => {
         </div>
 
         <div className="login-info">
+
           <h4>
-            Have an account? <Link to="/login">Login</Link>
+            Have an account? <Link to="/login">Sign in</Link>
           </h4>
           <div className="logoin">
-            <h2>Sign Up</h2>
+            
+            <h2>Create an account</h2>
             <p>
               Sign Up is a registration process that allows users to create a new account on a website or application. By
-              providing their name, email, and password, users can create a personalized account and access various features
+              providing their name, email users can create a personalized account and access various features
               and services.
             </p>
           </div>
