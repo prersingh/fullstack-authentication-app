@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import './SuccessPage.css';
 
 const SuccessPage = () => {
   const navigate = useNavigate();
 
   useEffect(() => {
     const redirectTimer = setTimeout(() => {
-      navigate('/');
+      navigate('/login');
     }, 2000);
 
     return () => clearTimeout(redirectTimer);
