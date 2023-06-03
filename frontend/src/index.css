@@ -7,13 +7,13 @@
   }
   
   .login-container {
-    border: 1px solid white;
+    border: 1px solid rgb(161, 56, 56);
     display: flex;
     justify-content: space-between;
     width: 800px;
     padding: 20px;
     border-radius: 15px;
-    position: relative; 
+    position: relative; /* Added position relative */
     z-index: 2;
     background-color: #171717;
     opacity: 0.9;
@@ -23,27 +23,27 @@
   .top-circle {
     height: 5rem;
     width: 5rem;
-    background-color: #00FF66;
+    background-color: yellow;
     position: absolute;
     border-radius: 50%;
-    top: 12rem;
+    top: 7.1rem; /* Adjust the value to control the overlapping position */
     left: 25%;
     transform: translateX(-50%);
-    z-index: 1; 
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); 
+    z-index: 1; /* Make sure the circle appears above the border */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Added box shadow for the shadow effect */
   }
   
   .bottom-circle {
     height: 7rem;
     width: 7rem;
-    background-color:#00FF66;
+    background-color: yellow;
     position: absolute;
     border-radius: 50%;
-    bottom: 9rem; 
+    bottom: 7.1rem; /* Adjust the value to control the overlapping position */
     left: 75%;
     transform: translateX(-50%);
-    z-index: 1; 
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); 
+    z-index: 1; /* Make sure the circle appears above the border */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Added box shadow for the shadow effect */
   }
     
     .login-form {
@@ -64,20 +64,23 @@
       width: 100%;
       padding: 10px;
       border-radius: 4px;
-      border: 1px solid white;
-  background-color: rgb(46, 41, 41);
-  color: white;
-  border-radius: 5px;
+      border: 1px solid rgb(161, 56, 56);
+      background-color: rgb(46, 41, 41);
+      color: white;
+      box-sizing: border-box; /* Add this line */
     }
     
     button {
-      background-color: #00FF66;
+      width: 100%;
+      background-color: rgb(236, 236, 104);
       color: #171717;
       border: none;
       padding: 10px 20px;
       border-radius: 25px;
       cursor: pointer;
+      box-sizing: border-box; /* Add this line */
     }
+     
     
     .login-info {
       width: 40%;
@@ -95,7 +98,7 @@
     }
     
     h2 {
-      color: #00FF66;
+      color: #fff;
     }
     
     h4 {
@@ -107,63 +110,103 @@
       line-height: 1.5;
     }
     .login-info a {
-      color: white;
+      color: yellow;
     }
   
     .login-form span {
-      color: white;
+      color: red;
     }
     .login-info a {
-      color: white;
+      color: yellow;
       text-decoration: none; 
     }
   
     .bottomm-circle {
       height: 7rem;
       width: 7rem;
-      background-color: #00FF66;
+      background-color: yellow;
       position: absolute;
       border-radius: 50%;
-      bottom: 9rem; 
+      bottom: 4.1rem; /* Adjust the value to control the overlapping position */
       left: 75%;
       transform: translateX(-50%);
-      z-index: 1; 
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); 
+      z-index: 1; /* Make sure the circle appears above the border */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Added box shadow for the shadow effect */
     }
   
     .topp-circle {
       height: 5rem;
       width: 5rem;
-      background-color: #00FF66;
+      background-color: yellow;
       position: absolute;
       border-radius: 50%;
-      top: 10rem; 
+      top: 5.1rem; /* Adjust the value to control the overlapping position */
       left: 25%;
       transform: translateX(-50%);
-      z-index: 1; 
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); 
+      z-index: 1; /* Make sure the circle appears above the border */
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Added box shadow for the shadow effect */
     }
-
-    .success-page {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 100vh;
-        background-color: #171717;
-      }
-      
-      .success-box {
-        border: 1px solid white;
-        padding: 20px;
-        text-align: center;
-        width: 400px;
-      }
-      
-      .success-box h2 {
-        color: #00FF66;
-      }
-      
-      .success-box p {
-        color: #555;
-      }
-      
+  
+    .progress-indicator {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 20px;
+    }
+    
+    .progress-indicator span {
+      font-size: 24px;
+      margin: 0 5px;
+      color: #171717;
+    }
+    
+    .active-step {
+      color: yellow;
+    }
+    .inactive-step {
+      color: #171717;
+    }
+    
+    .step-completion {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .step-dot {
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background-color: #ccc;
+      transition: background-color 0.3s ease;
+    }
+    
+    .step-line {
+      flex-grow: 1;
+      height: 2px;
+      background-color: #ccc;
+      transition: background-color 0.3s ease;
+    }
+    
+    .step-text {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+    
+    .step-text span {
+      color: #ccc;
+    }
+    
+    .step-text span.completed {
+      color: #3cba54;
+    }
+    
+    .step-dot.completed {
+      background-color: #3cba54;
+    }
+    
+    .step-line.completed {
+      background-color: #3cba54;
+    }
