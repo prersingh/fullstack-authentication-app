@@ -21,6 +21,21 @@ db.connect((err) => {
   console.log('Connected to the database');
 });
 
+app.post('/signup', (req, res) => {
+    const { name, email } = req.body;
+    const sql = 'INSERT INTO login (name, email) VALUES (?, ?)';
+    const values = [name, email];
+  
+    db.query(sql, values, (err, result) => {
+      if (err) {
+        console.error('Error inserting data into the database:', err);
+        return res.status(500).json('Error inserting data');
+      }
+  
+      return res.json('Success');
+    });
+});
+
 
 const port = 8081;
 app.listen(port, () => {

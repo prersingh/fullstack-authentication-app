@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import validation from './components/SignupValidation';
+import validation from './components/LoginValidation';
+import axios from 'axios';
+import emailjs from 'emailjs-com';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -18,71 +20,111 @@ const Signup = () => {
     setValues((prev) => ({ ...prev, [event.target.name]: event.target.value }));
   };
 
+  const generateOTP = () => {
+    const otp = Math.floor(1000 + Math.random() * 9000);
+    setOTP(otp.toString());
+    return otp;
+  };
+
+  const sendOTPEmail = () => {
+    const generatedOTP = generateOTP();
+
+    const templateParams = {
+      to_email: values.email,
+      from_name: 'Max Techies',
+      from_email: 'info@maxtechies.com',
+      otp: generatedOTP,
+    };
+
+    emailjs
+      .send('service_1gfs15h', 'template_q4n1qfg', templateParams, '3_35bjSippjOHCRGX')
+      .then((response) => {
+        console.log('OTP email sent successfully!', response.status, response.text);
+        setOTP(generatedOTP);
+        setStep(2);
+      })
+      .catch((error) => {
+        console.error('Error sending OTP email:', error);
+        alert('Error sending OTP email. Please try again later.');
+      });
+  };
+
   const handleNext = () => {
     setErrors(validation(values));
-    if (errors.name === '' && errors.email === '') {
-      const otp_val = Math.floor(Math.random() * 10000);
-      setOTP(otp_val);
-      setStep(2);
+    if (!errors.name && !errors.email) {
+      sendOTPEmail();
     }
   };
 
-  const handleSignup = () => {
-
+  const handleVerifyOTP = (e) => {
+    e.preventDefault();
+    if (Number(userOTP) === Number(otp)) {
+      setStep(3);
+      handleSignup(); 
+    } else {
+      alert('Invalid OTP');
+    }
   };
+  
+  const handleSignup = () => {
+    axios
+      .post('http://localhost:8081/signup', values)
+      .then((res) => {
+        if (res.data === 'Success') {
+          navigate('/success');
+        } else {
+          alert('Signup failed. Please try again.');
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+        alert('Error occurred during signup. Please try again later.');
+      });
+  };
+  
 
   return (
     <div className="login-page">
       <div className="topp-circle"></div>
 
       <div className="login-container">
-
         <div className="login-form">
-        <div className="topps-circle"></div>
-
-          <h2></h2>
+          <h2>Sign Up</h2>
           <div className="step-completion">
-  <div className={`step-dot ${step >= 1 ? 'completed' : ''}`} />
-  <div className={`step-line ${step >= 2 ? 'completed' : ''}`} />
-  <div className={`step-dot ${step >= 2 ? 'completed' : ''}`} />
-  <div className={`step-line ${step >= 3 ? 'completed' : ''}`} />
-  <div className={`step-dot ${step >= 3 ? 'completed' : ''}`} />
-</div>
-<div className="step-text">
-  <span className={`${step >= 1 ? 'completed' : ''}`}>
-    Get OTP
-  </span>
-  <span className={`${step >= 2 ? 'completed' : ''}`}>
-    Validate OTP
-  </span>
-  <span className={`${step >= 3 ? 'completed' : ''}`}>
-    Sign in
-  </span>
-</div>
-
+            <div className={`step-dot ${step >= 1 ? 'completed' : ''}`} />
+            <div className={`step-line ${step >= 2 ? 'completed' : ''}`} />
+            <div className={`step-dot ${step >= 2 ? 'completed' : ''}`} />
+            <div className={`step-line ${step >= 3 ? 'completed' : ''}`} />
+            <div className={`step-dot ${step >= 3 ? 'completed' : ''}`} />
+          </div>
+          <div className="step-text">
+            <span className={`${step >= 1 ? 'completed' : ''}`}>Get OTP</span>
+            <span className={`${step >= 2 ? 'completed' : ''}`}>Validate OTP</span>
+            <span className={`${step >= 3 ? 'completed' : ''}`}>Sign Up</span>
+          </div>
 
           {step === 1 && (
-            <form action="#">
+            <form>
               <div className="form-group">
-                <label htmlFor="Name"></label>
-                <input type="name" placeholder="Name" name="name" onChange={handleInput} />
+                <label htmlFor="name">Name</label>
+                <input type="text" placeholder="Enter Name" name="name" onChange={handleInput} />
                 {errors.name && <span>{errors.name}</span>}
               </div>
               <div className="form-group">
-                <label htmlFor="email"></label>
-                <input type="email" placeholder="Email" name="email" onChange={handleInput} />
+                <label htmlFor="email">Email</label>
+                <input type="email" placeholder="Enter Email" name="email" onChange={handleInput} />
                 {errors.email && <span>{errors.email}</span>}
               </div>
               <button type="button" onClick={handleNext}>
-                Get Otp
+                Get OTP
               </button>
             </form>
           )}
 
           {step === 2 && (
-            <form action="#" onSubmit={handleSignup}>
+            <form onSubmit={handleVerifyOTP}>
               <div className="form-group">
-                <label htmlFor="otp">Validate</label>
+                <label htmlFor="otp">Enter OTP</label>
                 <input type="text" placeholder="Enter OTP" name="otp" onChange={(e) => setUserOTP(e.target.value)} />
               </div>
               <button type="submit">Validate</button>
@@ -91,16 +133,14 @@ const Signup = () => {
         </div>
 
         <div className="login-info">
-
           <h4>
-            Have an account? <Link to="/login">Sign in</Link>
+            Have an account? <Link to="/login">Login</Link>
           </h4>
           <div className="logoin">
-            
-            <h2>Create an account</h2>
+            <h2>Sign Up</h2>
             <p>
               Sign Up is a registration process that allows users to create a new account on a website or application. By
-              providing their name, email users can create a personalized account and access various features
+              providing their name, email, and password, users can create a personalized account and access various features
               and services.
             </p>
           </div>
