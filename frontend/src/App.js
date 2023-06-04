@@ -1,8 +1,8 @@
-import Login from "./Login"
+import Login from "./pages/Login"
 import {BrowserRouter,Routes,Route} from 'react-router-dom'
-import Signup from "./Signup"
-import SuccessPage from "./SuccessPage"
-import Home from "./HomePage"
+import Signup from "./pages/Signup"
+import SuccessPage from "./pages/SuccessPage"
+import Home from "./pages/HomePage"
 
 const App = () => {
   return (
